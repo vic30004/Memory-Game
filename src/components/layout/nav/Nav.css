@@ -1,0 +1,22 @@
+#navBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--dark-color);
+    color: var(--light-color);
+    position:sticky;
+    top: 0;
+    z-index: 2;
+}
+
+#navBar .logo{
+    text-transform: uppercase;
+}
+
+#navBar .nav-list{
+    display: flex;
+}
+
+#navBar .nav-list li{
+    padding: 0 1rem;
+}
