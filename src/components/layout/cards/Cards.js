@@ -1,39 +1,36 @@
-import React, { Component} from 'react';
-import CardsItems from './CardsItems';
+import React, { Component } from 'react';
 import './Cards.css';
-import ShowsContext from '../../context/shows/ShowsContext';
 
 class Cards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
+      items: []
     };
   }
 
   test = [];
   score = this.props.score;
-  highScore=this.props.highScore
+  highScore = this.props.highScore;
   shuffleArray = arr => {
     this.setState({ items: arr.sort(() => Math.random() - 0.5) });
   };
 
   shuffle = e => {
-      
     if (this.test.indexOf(e.target.src) === -1) {
       this.test.push(e.target.src);
       this.score++;
-        if(this.score>this.highScore){
-            this.highScore++
-        }
-        if(this.highScore===12 && this.score===12){
-            alert("you win")
-            this.score=0
-        }
-            
+      if (this.score > this.highScore) {
+        this.highScore++;
+      }
+      if (this.highScore === 12 && this.score === 12) {
+        alert('you win');
+        this.score = 0;
+      }
     } else {
-      alert('you lose');
       this.score = 0;
+      alert('you lose');
+
       return (this.test = []);
     }
 
@@ -52,17 +49,18 @@ class Cards extends Component {
   render() {
     return (
       <section id='shows'>
-      <div className="score">
-       <ul className="score-list py-1">
+        <div className='score'>
+          <ul className='score-list py-1'>
             <li>Score:{this.score}</li>
             <li>HighScore:{this.highScore}</li>
-            </ul>
-      </div>
-           
+          </ul>
+        </div>
+
         <div className='container'>
           {this.state.items.map(data => (
             <img
               className='card'
+              key={data.id}
               src={data.image}
               onClick={this.shuffle}
               alt=''

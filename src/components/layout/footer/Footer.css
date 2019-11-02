@@ -1,0 +1,14 @@
+#foot{
+    background: var(--dark-color);
+    color:var(--light-color);
+}
+
+#foot .foot-list{
+    display: flex;
+    justify-content: center;
+}
+
+
+#foot .foot-list li{
+    margin: 0 1rem;
+}

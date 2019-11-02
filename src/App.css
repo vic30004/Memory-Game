@@ -17,12 +17,19 @@ h1{
   font-size:2rem;
 }
 
+ul{
+  margin:0;
+}
 li{
   font-size: 1.5rem;
   list-style-type: none;
 }
 
-
+a{
+  text-decoration: none;
+  color: var(--light-color);
+  font-size: 1.5rem;
+}
 /* Utility */
 .my-1-all{
   margin: 1rem;

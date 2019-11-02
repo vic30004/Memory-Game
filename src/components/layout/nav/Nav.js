@@ -1,6 +1,5 @@
 import React from 'react';
 import './Nav.css';
-import ShowsContext from '../../context/shows/ShowsContext';
 
 export default function Nav(props) {
   

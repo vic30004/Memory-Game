@@ -1,8 +1,8 @@
-import React, {Component,useState, Fragment} from 'react';
+import React, {Component,Fragment} from 'react';
 import Nav from './components/layout/nav/Nav'
 import HeroHead from './components/layout/header/HeroHead'
 import Cards from './components/layout/cards/Cards'
-import ShowsState from './components/context/shows/ShowsState'
+import Footer from './components/layout/footer/Footer'
 import './App.css';
 
 
@@ -19,13 +19,12 @@ class APP extends Component {
   render(){
     const { score,highScore} = this.state
     return(
-    <ShowsState>
     <Fragment>
     <Nav score={score} highScore={highScore}/>
       <HeroHead/>
       <Cards score={score} highScore={highScore}/>
+      <Footer/>
     </Fragment>
-    </ShowsState>
   )
   }
 
