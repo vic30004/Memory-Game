@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect } from 'react';
+import React, { Component} from 'react';
 import CardsItems from './CardsItems';
 import './Cards.css';
 import ShowsContext from '../../context/shows/ShowsContext';
@@ -8,24 +8,33 @@ class Cards extends Component {
     super(props);
     this.state = {
       items: [],
-      count: 0,
-      item: null
     };
   }
 
   test = [];
-
+  score = this.props.score;
+  highScore=this.props.highScore
   shuffleArray = arr => {
     this.setState({ items: arr.sort(() => Math.random() - 0.5) });
   };
+
   shuffle = e => {
+      
     if (this.test.indexOf(e.target.src) === -1) {
       this.test.push(e.target.src);
-      console.log(this.test);
-    }
-    else{
-        alert("you lose")
-        return this.test=[]
+      this.score++;
+        if(this.score>this.highScore){
+            this.highScore++
+        }
+        if(this.highScore===12 && this.score===12){
+            alert("you win")
+            this.score=0
+        }
+            
+    } else {
+      alert('you lose');
+      this.score = 0;
+      return (this.test = []);
     }
 
     this.shuffleArray(this.state.items);
@@ -43,6 +52,13 @@ class Cards extends Component {
   render() {
     return (
       <section id='shows'>
+      <div className="score">
+       <ul className="score-list py-1">
+            <li>Score:{this.score}</li>
+            <li>HighScore:{this.highScore}</li>
+            </ul>
+      </div>
+           
         <div className='container'>
           {this.state.items.map(data => (
             <img
