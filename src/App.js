@@ -1,30 +1,42 @@
-import React, {useState, Fragment} from 'react';
+import React, {Component,useState, Fragment} from 'react';
 import Nav from './components/layout/nav/Nav'
 import HeroHead from './components/layout/header/HeroHead'
+import Cards from './components/layout/cards/Cards'
+import ShowsState from './components/context/shows/ShowsState'
 import './App.css';
 
 
-const APP=()=>{
-
-  const [shows,setShows] =useState([]);
-  const [loading, setLoading] = useState()
-  const [score, setScore] = useState({});
-
-  const getShows = async ()=>{
-    let res =await fetch('https://gist.githubusercontent.com/vic30004/f2db9ef8923eb4a5821258b240843390/raw/4d78ee18a2a0eed79262628b935da78e71a99900/Memory-game.json');
-    let data = await res.json();
-    setShows(data)
-    console.log(data)
-    setLoading(false)
+class APP extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      shows:[],
+      score:0,
+      highScore:0
+    }
   }
-  console.log(shows)
 
-  return(
+ 
+  
+ componentDidMount(){
+      const URL = "https://gist.githubusercontent.com/vic30004/59d9abf8c119578210f486c53d953205/raw/c3670f660da5d9554ce4c5aae37e3144a701dd3d/cupcake.json";
+      fetch(URL)
+      .then(res=>res.json)
+      .then(data=>  this.setState({shows:data}))
+      console.log(this.state.shows)
+  }
+  render(){
+    return(
+    <ShowsState>
     <Fragment>
-    <Nav/>
+    <Nav score={this.state.score} highScore={this.state.highScore}/>
       <HeroHead/>
+      <Cards score={this.state.score} highScore={this.state.highScore}/>
     </Fragment>
+    </ShowsState>
   )
+  }
+
 }
 
 export default APP
