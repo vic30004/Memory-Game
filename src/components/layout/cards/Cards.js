@@ -14,22 +14,29 @@ class Cards extends Component {
   highScore = this.props.highScore;
   shuffleArray = arr => {
     this.setState({ items: arr.sort(() => Math.random() - 0.5) });
+    console.log(this.state.items);
   };
 
   shuffle = e => {
     if (this.test.indexOf(e.target.src) === -1) {
       this.test.push(e.target.src);
+      console.log(this.state.items);
       this.score++;
       if (this.score > this.highScore) {
         this.highScore++;
       }
       if (this.highScore === 12 && this.score === 12) {
-        alert('you win');
+        alert(`Surprise, Surprise, you won the game.\nYou weren't supposed to win. I promise you, you won't win next time\n Score:${this.score}\nHighScore: ${this.highScore}`);
         this.score = 0;
+      }
+      else if(this.highScore === 6 && this.score === 6){
+        alert("Hmm seems like you're half way there. I suggest you give up, because no one can win this game!")
       }
     } else {
       this.score = 0;
-      alert('you lose');
+      alert(
+        `Oh no! You lost! \nScore: ${this.score}\n HighScore:${this.highScore} \nTry again!!`
+      );
 
       return (this.test = []);
     }
@@ -39,7 +46,7 @@ class Cards extends Component {
 
   componentDidMount() {
     let query =
-      'https://gist.githubusercontent.com/vic30004/f2db9ef8923eb4a5821258b240843390/raw/4d78ee18a2a0eed79262628b935da78e71a99900/Memory-game.json';
+      'https://gist.githubusercontent.com/vic30004/f2db9ef8923eb4a5821258b240843390/raw/e427808738d6f166810f895d8113a93d34c93bd6/Memory-game.json';
 
     fetch(query)
       .then(res => res.json())
@@ -58,13 +65,9 @@ class Cards extends Component {
 
         <div className='container'>
           {this.state.items.map(data => (
-            <img
-              className='card'
-              key={data.id}
-              src={data.image}
-              onClick={this.shuffle}
-              alt=''
-            />
+            <div className='card'>
+              <img src={data.image} onClick={this.shuffle} alt='' />
+            </div>
           ))}
         </div>
       </section>
